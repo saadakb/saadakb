@@ -1,0 +1,3 @@
+- 👋 Hi, I am Saad Akbar, and this is the first time ever that i am writing a read me file :P ironically its about me.
+- I am a Sales Tech guy, trying to hold onto my Tech Background 
+- A perpetual learner :)
