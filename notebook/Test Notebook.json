@@ -4,6 +4,10 @@
 		"description": "Test code in spark to connect to Log Analytics and write custom Logs.",
 		"nbformat": 4,
 		"nbformat_minor": 2,
+		"bigDataPool": {
+			"referenceName": "SparkPool",
+			"type": "BigDataPoolReference"
+		},
 		"sessionProperties": {
 			"driverMemory": "28g",
 			"driverCores": 4,
@@ -15,21 +19,33 @@
 				"spark.dynamicAllocation.enabled": "false",
 				"spark.dynamicAllocation.minExecutors": "2",
 				"spark.dynamicAllocation.maxExecutors": "2",
-				"spark.autotune.trackingId": "9fe6ce2c-4c7e-448d-809c-28741b23db5d"
+				"spark.autotune.trackingId": "1b34bf3f-5ce4-406c-b7b5-c1b99c77a8dd"
 			}
 		},
 		"metadata": {
 			"saveOutput": true,
-			"synapse_widget": {
-				"version": "0.1"
-			},
 			"enableDebugMode": false,
 			"kernelspec": {
 				"name": "synapse_pyspark",
-				"display_name": "python"
+				"display_name": "Synapse PySpark"
 			},
 			"language_info": {
 				"name": "python"
+			},
+			"a365ComputeOptions": {
+				"id": "/subscriptions/98c3c754-24b8-47d8-a2c3-01796bd66d9d/resourceGroups/saad-synapse-rg/providers/Microsoft.Synapse/workspaces/saad-synapse-ws/bigDataPools/SparkPool",
+				"name": "SparkPool",
+				"type": "Spark",
+				"endpoint": "https://saad-synapse-ws.dev.azuresynapse.net/livyApi/versions/2019-11-01-preview/sparkPools/SparkPool",
+				"auth": {
+					"type": "AAD",
+					"authResource": "https://dev.azuresynapse.net"
+				},
+				"sparkVersion": "3.2",
+				"nodeCount": 10,
+				"cores": 4,
+				"memory": 28,
+				"automaticScaleJobs": false
 			},
 			"sessionKeepAliveTimeout": 30
 		},
@@ -37,8 +53,15 @@
 			{
 				"cell_type": "code",
 				"source": [
-					""
-				]
+					"def inside(p):\r\n",
+					"    x, y = random.random(), random.random()\r\n",
+					"    return x*x + y*y < 1\r\n",
+					"\r\n",
+					"count = sc.parallelize(range(0, NUM_SAMPLES)) \\\r\n",
+					"             .filter(inside).count()\r\n",
+					"print(\"Pi is roughly %f\" % (4.0 * count / NUM_SAMPLES))"
+				],
+				"execution_count": 1
 			}
 		]
 	}
